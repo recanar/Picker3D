@@ -10,15 +10,22 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameOverMenu;
     [SerializeField] private GameObject nextLevelMenu;
     [SerializeField] private Button restartButton;
+    [SerializeField] private Button nextLevelButton;
+
+    [SerializeField] private DataManager dataManager;
 
     [HideInInspector] public bool isPlaying;
     [HideInInspector] public bool isGameOver;
 
     [HideInInspector] public int point = 0;
     [HideInInspector] public int levelStage = 1;
-    [HideInInspector] public int currentLevel = 1;
 
-
+    void Start()
+    {
+        restartButton.onClick.AddListener(RestartScene);
+        nextLevelButton.onClick.AddListener(NextLevel);
+        dataManager = GameObject.Find("DataManager").GetComponent<DataManager>();
+    }
     void Update()
     {
         LevelCompleteCheck();
@@ -27,20 +34,21 @@ public class GameManager : MonoBehaviour
         pointText.text = "Point:" + point;//For debug
 
     }
-    void Start()
+    
+    void RestartScene()
     {
-        Button resBtn = restartButton.GetComponent<Button>();
-        resBtn.onClick.AddListener(TaskOnClick);
+        SceneManager.LoadScene("SampleScene");
     }
-    void TaskOnClick()
+    void NextLevel()
     {
+        dataManager.IncreaseLevel();
         SceneManager.LoadScene("SampleScene");
     }
     void LevelCompleteCheck()
     {
         if (levelStage <= 3)
         {
-            levelText.text = "Level:" + currentLevel + "-" + levelStage;
+            levelText.text = "Level:" + dataManager.highestLevel + "-" + levelStage;
         }
         else
         {
