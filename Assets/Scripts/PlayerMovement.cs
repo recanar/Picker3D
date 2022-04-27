@@ -19,8 +19,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        Test();
-
+        //Test();//for debugging
         horizontal = Input.GetAxis("Horizontal") * speed;//left-right movement input
         
         if (manager.isPlaying)
@@ -48,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
         }//stop player
     }
 
-    private void Test()
+    private void Test()//for debugging
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {

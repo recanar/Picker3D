@@ -9,6 +9,7 @@ public class DataManager : MonoBehaviour
     private void Start()
     {
         LoadData();
+        Time.timeScale = 1f + highestLevel * 0.1f;
     }
     public void IncreaseLevel()
     {

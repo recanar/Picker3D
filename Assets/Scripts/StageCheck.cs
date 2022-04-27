@@ -27,6 +27,7 @@ public class StageCheck : MonoBehaviour
         if (other.gameObject.CompareTag("Point"))
         {
             manager.point++;
+            Destroy(other.gameObject.transform.parent.gameObject,3f);//destroy balls after 3 sec
         }
     }
     IEnumerator PointCheck()
