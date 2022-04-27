@@ -8,8 +8,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI levelText;
     [SerializeField] TextMeshProUGUI pointText;
     [SerializeField] private GameObject gameOverMenu;
+    [SerializeField] private GameObject nextLevelMenu;
     [SerializeField] private Button restartButton;
-
 
     [HideInInspector] public bool isPlaying;
     [HideInInspector] public bool isGameOver;
@@ -21,16 +21,11 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (levelStage <= 3)
-            levelText.text = "Level:" + currentLevel + "-" + levelStage;
-        else
-            levelText.text = "Finished";
-        pointText.text = "Point:" + point;
+        LevelCompleteCheck();
+        GameOverCheck();
+        
+        pointText.text = "Point:" + point;//For debug
 
-        if (isGameOver)
-        {
-            gameOverMenu.SetActive(true);
-        }
     }
     void Start()
     {
@@ -40,5 +35,24 @@ public class GameManager : MonoBehaviour
     void TaskOnClick()
     {
         SceneManager.LoadScene("SampleScene");
+    }
+    void LevelCompleteCheck()
+    {
+        if (levelStage <= 3)
+        {
+            levelText.text = "Level:" + currentLevel + "-" + levelStage;
+        }
+        else
+        {
+            levelText.text = "Finished";
+            nextLevelMenu.gameObject.SetActive(true);
+        }
+    }
+    void GameOverCheck()
+    {
+        if (isGameOver)
+        {
+            gameOverMenu.SetActive(true);
+        }
     }
 }
