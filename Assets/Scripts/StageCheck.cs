@@ -1,55 +1,54 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StageCheck : MonoBehaviour
 {
-    GameManager manager;
+    GameManager gameManager;
     TextMesh textMesh;
     [SerializeField] private int requiredBall;
     [SerializeField] private GameObject point3DText;
     void Start()
     {
         textMesh= point3DText.GetComponent<TextMesh>();
-        manager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
     private void Update()
     {
-        textMesh.text = manager.point + "/" + requiredBall;
+        textMesh.text = gameManager.point + "/" + requiredBall;
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            manager.isPlaying = false;
             StartCoroutine(PointCheck());
         }
         if (other.gameObject.CompareTag("Point"))
         {
-            manager.point++;
+            gameManager.point++;
             Destroy(other.gameObject.transform.parent.gameObject,3f);//destroy balls after 3 sec
         }
     }
     IEnumerator PointCheck()
     {
+        gameManager.currentState = State.WaitingForCheck;
         yield return new WaitForSeconds(2f);
-        if (manager.point >= requiredBall)
+        if (gameManager.point >= requiredBall)
         {
-            manager.levelStage++;
-            if (manager.levelStage>3)
+            gameManager.levelStage++;
+            if (gameManager.levelStage>3)
             {
-                print("Level Complete");
+                gameManager.currentState=State.Win;
             }
             else
-            manager.isPlaying=true;
-            transform.parent.GetChild(0).gameObject.SetActive(true);
+            gameManager.currentState=State.Playing;
+            transform.parent.GetChild(0).gameObject.SetActive(true);//activate platform for hide stage box
             point3DText.SetActive(false);
-            manager.point=0;
+            gameManager.point=0;
         }
         else
         {
             print("fail");
-            manager.isGameOver = true;
+            gameManager.currentState = State.GameOver;
         }
     }
 }

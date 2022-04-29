@@ -5,8 +5,8 @@ using System.IO;
 
 public class DataManager : MonoBehaviour
 {
-    public int highestLevel;
-    private void Start()
+    public int highestLevel=1;
+    private void Awake()
     {
         LoadData();
         Time.timeScale = 1f + highestLevel * 0.1f;
