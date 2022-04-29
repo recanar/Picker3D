@@ -1,20 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System.IO;
 
 public class DataManager : MonoBehaviour
 {
-    public int highestLevel=1;
+    public int currentLevel;
     private void Awake()
     {
         LoadData();
-        Time.timeScale = 1f + highestLevel * 0.1f;
+        Time.timeScale = 1f + currentLevel * 0.1f;
     }
     public void IncreaseLevel()
     {
-        highestLevel++;
-        PlayerData playerData = new PlayerData(highestLevel);
+        currentLevel++;
+        PlayerData playerData = new PlayerData(currentLevel);
         SaveData(playerData);
     }
 
@@ -44,7 +42,7 @@ public class DataManager : MonoBehaviour
             string json = File.ReadAllText(path);
             PlayerData playerData = JsonUtility.FromJson<PlayerData>(json);
 
-            highestLevel= playerData._Level;
+            currentLevel= playerData._Level;
         }
     }
 }

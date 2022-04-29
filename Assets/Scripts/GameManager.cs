@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
 {
     [HideInInspector] public State currentState;
 
-    [HideInInspector] public int point = 0;
     [HideInInspector] public int numberOfStagesOnThisLevel=3;
     [HideInInspector] public int levelStage = 1;
 

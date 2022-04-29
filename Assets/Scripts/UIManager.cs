@@ -8,7 +8,6 @@ public class UIManager : MonoBehaviour
 {
     #region UI Variables
     [SerializeField] private TextMeshProUGUI levelText;
-    [SerializeField] private TextMeshProUGUI pointText;
     [SerializeField] private TextMeshProUGUI tapToStartText;
     [SerializeField] private GameObject gameOverMenu;
     [SerializeField] private GameObject nextLevelMenu;
@@ -28,7 +27,6 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pointText.text = "Point:" +gameManager.point;//For debug
         GameStartCheck();//UI for explain how to start game
         LevelInfo();
         GameOverMenu();
@@ -45,10 +43,7 @@ public class UIManager : MonoBehaviour
     }
     private void LevelInfo()
     {
-        if (gameManager.currentState == State.Playing)
-        {
-            levelText.text = "Level:" + dataManager.highestLevel + "-" + gameManager.levelStage;
-        }
+        levelText.text = "Level:" + (dataManager.currentLevel+1) + "-" + gameManager.levelStage;
     }
     void GameOverMenu()
     {

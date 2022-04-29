@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -825,6 +825,7 @@ GameObject:
   - component: {fileID: 960782969}
   - component: {fileID: 960782968}
   - component: {fileID: 960782967}
+  - component: {fileID: 960782971}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -916,6 +917,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &960782971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960782966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b47f6642259f6dd42a6cf9b2f12016b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelText: {fileID: 568181281}
+  tapToStartText: {fileID: 447252234}
+  gameOverMenu: {fileID: 1555849848}
+  nextLevelMenu: {fileID: 205745578}
+  restartButton: {fileID: 2043193313}
+  nextLevelButton: {fileID: 2136762668}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1107,7 +1126,7 @@ GameObject:
   - component: {fileID: 1234104757}
   - component: {fileID: 1234104756}
   m_Layer: 5
-  m_Name: Point
+  m_Name: PointText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1672,18 +1691,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d5114a4a0d6fe84fa2e411255c77a66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelText: {fileID: 568181281}
-  pointText: {fileID: 1234104756}
-  tapToStartText: {fileID: 447252234}
-  gameOverMenu: {fileID: 1555849848}
-  nextLevelMenu: {fileID: 205745578}
-  restartButton: {fileID: 2043193313}
-  nextLevelButton: {fileID: 2136762668}
-  dataManager: {fileID: 0}
-  isGameStarted: 0
-  isPlaying: 0
-  isGameOver: 0
-  point: 0
+  currentState: 0
+  numberOfStagesOnThisLevel: 3
   levelStage: 1
 --- !u!4 &1638099415
 Transform:

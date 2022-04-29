@@ -5,16 +5,19 @@ public class StageCheck : MonoBehaviour
 {
     GameManager gameManager;
     TextMesh textMesh;
+
+    private int point;
     [SerializeField] private int requiredBall;
     [SerializeField] private GameObject point3DText;
     void Start()
     {
-        textMesh= point3DText.GetComponent<TextMesh>();
+        point3DText = transform.GetChild(1).gameObject;
+        textMesh = point3DText.GetComponent<TextMesh>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
     private void Update()
     {
-        textMesh.text = gameManager.point + "/" + requiredBall;
+        BallCountText();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -24,7 +27,7 @@ public class StageCheck : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Point"))
         {
-            gameManager.point++;
+            point++;
             Destroy(other.gameObject.transform.parent.gameObject,3f);//destroy balls after 3 sec
         }
     }
@@ -32,7 +35,7 @@ public class StageCheck : MonoBehaviour
     {
         gameManager.currentState = State.WaitingForCheck;
         yield return new WaitForSeconds(2f);
-        if (gameManager.point >= requiredBall)
+        if (point >= requiredBall)
         {
             gameManager.levelStage++;
             if (gameManager.levelStage>3)
@@ -41,14 +44,18 @@ public class StageCheck : MonoBehaviour
             }
             else
             gameManager.currentState=State.Playing;
-            transform.parent.GetChild(0).gameObject.SetActive(true);//activate platform for hide stage box
+            transform.GetChild(0).gameObject.SetActive(true);//activate platform for hide stage box
             point3DText.SetActive(false);
-            gameManager.point=0;
+            point=0;
         }
         else
         {
             print("fail");
             gameManager.currentState = State.GameOver;
         }
+    }
+    private void BallCountText()
+    {
+        textMesh.text = point + "/" + requiredBall;
     }
 }
