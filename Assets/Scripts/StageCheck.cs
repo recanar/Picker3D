@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using UnityEngine;
-
 public class StageCheck : MonoBehaviour
+//Script for stage prefab
 {
     GameManager gameManager;
     TextMesh textMesh;
 
     private int point;
-    [SerializeField] private int requiredBall;
+    public int requiredBall;
+
     [SerializeField] private GameObject point3DText;
+    [SerializeField] private GameObject hiddenPlatform;
     void Start()
     {
+        hiddenPlatform = transform.GetChild(0).gameObject;
         point3DText = transform.GetChild(1).gameObject;
         textMesh = point3DText.GetComponent<TextMesh>();
+
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
     private void Update()
@@ -28,7 +32,12 @@ public class StageCheck : MonoBehaviour
         if (other.gameObject.CompareTag("Point"))
         {
             point++;
-            Destroy(other.gameObject.transform.parent.gameObject,3f);//destroy balls after 3 sec
+            Destroy(other.gameObject,3f);//destroy balls after 3 sec
+        }
+        if (other.gameObject.CompareTag("RedPoint"))
+        {
+            point--;
+            Destroy(other.gameObject, 3f);//destroy balls after 3 sec
         }
     }
     IEnumerator PointCheck()
@@ -44,7 +53,7 @@ public class StageCheck : MonoBehaviour
             }
             else
             gameManager.currentState=State.Playing;
-            transform.GetChild(0).gameObject.SetActive(true);//activate platform for hide stage box
+            hiddenPlatform.SetActive(true);//activate platform for hide stage box
             point3DText.SetActive(false);
             point=0;
         }

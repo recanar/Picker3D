@@ -7,7 +7,6 @@ public class DataManager : MonoBehaviour
     private void Awake()
     {
         LoadData();
-        Time.timeScale = 1f + currentLevel * 0.1f;
     }
     public void IncreaseLevel()
     {
