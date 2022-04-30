@@ -7,10 +7,10 @@ public class StageCheck : MonoBehaviour
     TextMesh textMesh;
 
     private int point;
-    public int requiredBall;
+    public int RequiredBall { get; set; }
 
-    [SerializeField] private GameObject point3DText;
-    [SerializeField] private GameObject hiddenPlatform;
+    private GameObject point3DText;
+    private GameObject hiddenPlatform;
     void Start()
     {
         hiddenPlatform = transform.GetChild(0).gameObject;
@@ -44,7 +44,7 @@ public class StageCheck : MonoBehaviour
     {
         gameManager.currentState = State.WaitingForCheck;
         yield return new WaitForSeconds(2f);
-        if (point >= requiredBall)
+        if (point >= RequiredBall)
         {
             gameManager.levelStage++;
             if (gameManager.levelStage>3)
@@ -65,6 +65,6 @@ public class StageCheck : MonoBehaviour
     }
     private void BallCountText()
     {
-        textMesh.text = point + "/" + requiredBall;
+        textMesh.text = point + "/" + RequiredBall;
     }
 }

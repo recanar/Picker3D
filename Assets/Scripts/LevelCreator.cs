@@ -17,7 +17,7 @@ public class LevelCreator : MonoBehaviour
     private Vector3 whereToAdd = Vector3.zero;//where to add platform,stage checker
     private float whereToAddPoint = 10;//required for locate points
 
-    protected float[] pointHorizontalPositions;
+    private float[] pointHorizontalPositions;
 
     DataManager dataManager;
 
@@ -47,76 +47,7 @@ public class LevelCreator : MonoBehaviour
         //0
     }
 
-    private void AddPlatform()
-    {
-        Instantiate(platformPrefab,whereToAdd,Quaternion.identity,platforms.transform);
-        whereToAdd += Vector3.forward * 10;
-    }
-    private void AddPlatform(int numberToCreate)
-    {
-        for (int i = 0; i < numberToCreate; i++)
-        {
-            Instantiate(platformPrefab, whereToAdd, Quaternion.identity, platforms.transform);
-            whereToAdd += Vector3.forward * 10;
-        }
-    }
-    private void AddStage(int requiredBallForPassStage)
-    {
-        GameObject stage= Instantiate(stagePrefab, whereToAdd, Quaternion.identity, stages.transform);
-        stage.GetComponent<StageCheck>().requiredBall=requiredBallForPassStage;
-        
-        whereToAdd += Vector3.forward * 10;
-    }
-
-    private void AddPointLine(int createCount, float horizontalPosition, float spaceBetweenPoints,float spaceAfterCreatePoints)
-    {
-        for (int i = 0; i < createCount; i++)
-        {
-            Instantiate(pointPrefab, new Vector3(horizontalPosition,0.25f,whereToAddPoint), Quaternion.identity, points.transform);
-            whereToAddPoint += spaceBetweenPoints;
-        }
-        whereToAddPoint += spaceAfterCreatePoints;
-    }
-    private void AddRedPointLine(int createCount, float horizontalPosition, float spaceBetweenPoints, float spaceAfterCreatePoints)
-    {
-        for (int i = 0; i < createCount; i++)
-        {
-            Instantiate(redPointPrefab, new Vector3(horizontalPosition, 0.25f, whereToAddPoint), Quaternion.identity, points.transform);
-            whereToAddPoint += spaceBetweenPoints;
-        }
-        whereToAddPoint += spaceAfterCreatePoints;
-    }
-    private void AddPointWall(float spaceAfterCreatePoints)
-    {
-        for (int i = 0; i < pointHorizontalPositions.Length; i++)
-        {
-            Instantiate(pointPrefab, new Vector3(pointHorizontalPositions[i], 0.25f, whereToAddPoint), Quaternion.identity, points.transform);
-        }
-        whereToAddPoint += spaceAfterCreatePoints;
-    }
-    private void AddRedPointLeftWall(float spaceAfterCreatePoints)
-    {
-        for (int i = 0; i <= pointHorizontalPositions.Length/2; i++)
-        {
-            Instantiate(redPointPrefab, new Vector3(pointHorizontalPositions[i], 0.25f, whereToAddPoint), Quaternion.identity, points.transform);
-        }
-        whereToAddPoint += spaceAfterCreatePoints;
-    }
-
-    private void AddRedPointRightWall(float spaceAfterCreatePoints)
-    {
-        for (int i = pointHorizontalPositions.Length-1; i >= pointHorizontalPositions.Length / 2; i--)
-        {
-            Instantiate(redPointPrefab, new Vector3(pointHorizontalPositions[i], 0.25f, whereToAddPoint), Quaternion.identity, points.transform);
-        }
-        whereToAddPoint += spaceAfterCreatePoints;
-    }
-    private void ChangeStage(int stage)
-    {
-        stage--;
-        whereToAddPoint = 10 + (110 * stage);
-    }
-
+    #region Levels
     private void Level1()
     {
         AddPlatform(10);
@@ -377,4 +308,76 @@ public class LevelCreator : MonoBehaviour
         AddPointWall(10);
         AddRedPointRightWall(10);
     }
+    #endregion
+    #region Level Creation Methods
+    private void AddPlatform()
+    {
+        Instantiate(platformPrefab,whereToAdd,Quaternion.identity,platforms.transform);
+        whereToAdd += Vector3.forward * 10;
+    }
+    private void AddPlatform(int numberToCreate)
+    {
+        for (int i = 0; i < numberToCreate; i++)
+        {
+            Instantiate(platformPrefab, whereToAdd, Quaternion.identity, platforms.transform);
+            whereToAdd += Vector3.forward * 10;
+        }
+    }
+    private void AddStage(int requiredBallForPassStage)
+    {
+        GameObject stage= Instantiate(stagePrefab, whereToAdd, Quaternion.identity, stages.transform);
+        stage.GetComponent<StageCheck>().RequiredBall = requiredBallForPassStage;
+        
+        whereToAdd += Vector3.forward * 10;
+    }
+
+    private void AddPointLine(int createCount, float horizontalPosition, float spaceBetweenPoints,float spaceAfterCreatePoints)
+    {
+        for (int i = 0; i < createCount; i++)
+        {
+            Instantiate(pointPrefab, new Vector3(horizontalPosition,0.25f,whereToAddPoint), Quaternion.identity, points.transform);
+            whereToAddPoint += spaceBetweenPoints;
+        }
+        whereToAddPoint += spaceAfterCreatePoints;
+    }
+    private void AddRedPointLine(int createCount, float horizontalPosition, float spaceBetweenPoints, float spaceAfterCreatePoints)
+    {
+        for (int i = 0; i < createCount; i++)
+        {
+            Instantiate(redPointPrefab, new Vector3(horizontalPosition, 0.25f, whereToAddPoint), Quaternion.identity, points.transform);
+            whereToAddPoint += spaceBetweenPoints;
+        }
+        whereToAddPoint += spaceAfterCreatePoints;
+    }
+    private void AddPointWall(float spaceAfterCreatePoints)
+    {
+        for (int i = 0; i < pointHorizontalPositions.Length; i++)
+        {
+            Instantiate(pointPrefab, new Vector3(pointHorizontalPositions[i], 0.25f, whereToAddPoint), Quaternion.identity, points.transform);
+        }
+        whereToAddPoint += spaceAfterCreatePoints;
+    }
+    private void AddRedPointLeftWall(float spaceAfterCreatePoints)
+    {
+        for (int i = 0; i <= pointHorizontalPositions.Length/2; i++)
+        {
+            Instantiate(redPointPrefab, new Vector3(pointHorizontalPositions[i], 0.25f, whereToAddPoint), Quaternion.identity, points.transform);
+        }
+        whereToAddPoint += spaceAfterCreatePoints;
+    }
+
+    private void AddRedPointRightWall(float spaceAfterCreatePoints)
+    {
+        for (int i = pointHorizontalPositions.Length-1; i >= pointHorizontalPositions.Length / 2; i--)
+        {
+            Instantiate(redPointPrefab, new Vector3(pointHorizontalPositions[i], 0.25f, whereToAddPoint), Quaternion.identity, points.transform);
+        }
+        whereToAddPoint += spaceAfterCreatePoints;
+    }
+    private void ChangeStage(int stage)
+    {
+        stage--;
+        whereToAddPoint = 10 + (110 * stage);
+    }
+    #endregion
 }

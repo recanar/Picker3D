@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     {
         if (currentState==State.WaitingTap)
         {
-            if (playerController.horizontalInput > 0.2 || playerController.horizontalInput < -0.2)
+            if (playerController.HorizontalInput > 0.2 || playerController.HorizontalInput < -0.2)
             {
                 currentState = State.Playing;
             }

@@ -2,11 +2,11 @@
 
 public class PlayerController : MonoBehaviour
 {
-    [HideInInspector] public float horizontalInput;
+    public float HorizontalInput { get; private set; }
 
-    float speed;
     Rigidbody rb;
     GameManager gameManager;
+    float speed;
     float horizontalMove;
     float limitMove = 3f;
     // Start is called before the first frame update
@@ -18,8 +18,8 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal");//left-right movement input
-        horizontalMove = horizontalInput * speed;
+        HorizontalInput = Input.GetAxis("Horizontal");//left-right movement input
+        horizontalMove = HorizontalInput * speed;
         if (gameManager.currentState==State.Playing)
         {
             if (transform.position.x<-limitMove||transform.position.x>limitMove)
