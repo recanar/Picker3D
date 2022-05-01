@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 6789582444305419791}
   m_Layer: 0
   m_Name: Stage
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -247,8 +247,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf86a07726f88594989b7ca79c01a7e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requiredBall: 0
-  point3DText: {fileID: 0}
 --- !u!1 &4442651055789214439
 GameObject:
   m_ObjectHideFlags: 0

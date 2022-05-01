@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour
     }
     private void LevelInfo()
     {
-        levelText.text = "Level:" + (dataManager.currentLevel+1) + "-" + gameManager.levelStage;
+        levelText.text = "Level:" + (dataManager.currentLevel) + "-" + gameManager.levelStage;
     }
     void GameOverMenu()
     {

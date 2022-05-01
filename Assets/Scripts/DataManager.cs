@@ -14,6 +14,11 @@ public class DataManager : MonoBehaviour
         PlayerData playerData = new PlayerData(currentLevel);
         SaveData(playerData);
     }
+    public void ChangeLevel(int level)
+    {
+        PlayerData playerData = new PlayerData(level);
+        SaveData(playerData);
+    }
 
     [System.Serializable]
     public class PlayerData

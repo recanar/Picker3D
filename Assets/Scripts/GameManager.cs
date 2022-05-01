@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 {
     [HideInInspector] public State currentState;
 
-    [HideInInspector] public int numberOfStagesOnThisLevel=3;
+    public int numberOfStagesOnThisLevel=3;
     [HideInInspector] public int levelStage = 1;
 
     PlayerController playerController;
@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
             if (playerController.HorizontalInput > 0.2 || playerController.HorizontalInput < -0.2)
             {
                 currentState = State.Playing;
+                numberOfStagesOnThisLevel = GameObject.FindGameObjectsWithTag("Stage").Length;
             }
         }
     }
