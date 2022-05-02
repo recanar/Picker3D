@@ -6,10 +6,15 @@ public class CameraOffSet : MonoBehaviour
 {
     Vector3 offset;
     GameObject player;
-    void Start()
+    void Awake()
     {
         offset = transform.position;
         player = GameObject.Find("Player");
+    }
+    private void OnEnable()
+    {
+        transform.rotation= Quaternion.identity;
+        transform.Rotate(Vector3.right*30);
     }
     void LateUpdate()
     {
